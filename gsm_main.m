@@ -1,23 +1,23 @@
 %----------------------------
-%¶Î¹ú±ò ¹ãÒå¿Õ¼äµ÷ÖÆ³ÌĞò
+%
 %-----------------------------
 clc
 clear all
-com_para.Mt=4;      %·¢ÉäÌìÏßÊı
-com_para.Mr=1;      %½ÓÊÕÌìÏßÊı
+com_para.Mt=4;      %å‘å°„å¤©çº¿æ•°
+com_para.Mr=1;      %æ¥æ”¶å¤©çº¿æ•°
 len=10e6;
 SNRindB=[0:5:40];
 
-err_hold=50; %¹æ¶¨µÄ´íÎó±ÈÌØÊıÖµ
+err_hold=50; %è§„å®šçš„é”™è¯¯æ¯”ç‰¹æ•°å€¼
 
 for i=1:length(SNRindB)
       errl=0;
       for j=1:len
           %H=(randn(com_para.Mr,com_para.Mt)+randn(com_para.Mr,com_para.Mt)*sqrt(-1))/sqrt(2);
-          H=RayleighFactor(com_para.Mr,com_para.Mt); % Éú³É¶ÀÁ¢ÈğÀûĞÅµÀ¾ØÕó
-          [r,b,BitAnt,Bit,total_pow,Mt_opt]=gsm_tx(com_para,SNRindB(i),H); %·¢Éä
-          [y]=gsm_rx(com_para,r,H,total_pow,Mt_opt);  %½ÓÊÕ
-          errl=errl+sum(abs(y-b.'));        %ÅĞ¾ö
+          H=RayleighFactor(com_para.Mr,com_para.Mt); % ç”Ÿæˆç‹¬ç«‹ç‘åˆ©ä¿¡é“çŸ©é˜µ
+          [r,b,BitAnt,Bit,total_pow,Mt_opt]=gsm_tx(com_para,SNRindB(i),H); %å‘å°„
+          [y]=gsm_rx(com_para,r,H,total_pow,Mt_opt);  %æ¥æ”¶
+          errl=errl+sum(abs(y-b.'));        %åˆ¤å†³
           if errl>err_hold
               break;
           end
@@ -27,8 +27,8 @@ for i=1:length(SNRindB)
 end
 semilogy(SNRindB,ber)
 axis([0 40 10^(-6) 1])
-title('GSMÎóÂëÂÊ·ÂÕæÇúÏß')
-xlabel('ĞÅÔë±È Eb/N0:dB')
-ylabel('ÎóÂëÂÊ');
+title('GSMè¯¯ç ç‡ä»¿çœŸæ›²çº¿')
+xlabel('ä¿¡å™ªæ¯” Eb/N0:dB')
+ylabel('è¯¯ç ç‡');
 
 
